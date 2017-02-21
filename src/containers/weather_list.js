@@ -2,6 +2,15 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 class WeatherList extends Component {
+  renderWeather(cityData){
+    const name = cityData.city.name;
+    return (
+      <tr key={name}>
+        <td>{name}</td>
+      </tr>
+    )
+  }
+
   render(){
     return (
       <table className="table table-hover">
@@ -14,19 +23,15 @@ class WeatherList extends Component {
           </tr>
         </thead>
         <tbody>
+          {this.props.weather.map(this.renderWeather)}
         </tbody>
       </table>
     );
   }
 }
 
-//In ES6 we can write it as:
+
 function mapStateToProps({ weather }){
-// the argument we are passing in is state, but if we are only
-//taking off one prop ('weather'), we can just pass in {weather},
-//which is the same as defining const weather = state.weather
-//now we have {weather: weather}
-//when we have a key and value that are completeley identical we can just write {weather}
   return { weather };
 }
 
